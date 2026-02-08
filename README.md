@@ -6,7 +6,7 @@ __Преподаватель курса:__  *Нартя Никита*
 
 ---
 
-[Лабораторная работа №1: Введение в JavaScript](https://github.com/leopard-bf187/PHP_labworks/tree/Lab1)
+[Лабораторная работа №1: t](https://github.com/leopard-bf187/PHP_labworks/tree/Lab1)
 ```bash
 git clone --single-branch -b Lab1 https://github.com/leopard-bf187/PHP_labworks.git
 ```
