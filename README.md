@@ -1,7 +1,8 @@
-# Лабораторные работы по JavaScript
+# Лабораторные работы по PHP
 
 __Студент:__  *Пармакли Леонид IA2404ru*  
-__Проверяющий:__  *Алексей Муринец*  
+__Преподаватель лабораторных работ:__  *Вишневский Борис*  
+__Преподаватель курса:__  *Нартя Никита*  
 
 ---
 
@@ -13,7 +14,7 @@ __Дата завершения:__ dd.mm.2026
 
 ---
 
-[Лабораторная работа №2: Работа с массивами в JavaScript](https://github.com/leopard-bf187/PHP_labworks/tree/Lab2)
+[Лабораторная работа №2: ](https://github.com/leopard-bf187/PHP_labworks/tree/Lab2)
 ```bash
 git clone --single-branch -b Lab2 https://github.com/leopard-bf187/PHP_labworks.git
 ```
@@ -21,7 +22,7 @@ __Дата завершения:__ dd.mm.2026
 
 ---
 
-[Лабораторная работа №3: Продвинутые объекты в JavaScript](https://github.com/leopard-bf187/PHP_labworks/tree/Lab3)
+[Лабораторная работа №3: ](https://github.com/leopard-bf187/PHP_labworks/tree/Lab3)
 ```bash
 git clone --single-branch -b Lab3 https://github.com/leopard-bf187/PHP_labworks.git
 ```
@@ -29,7 +30,7 @@ __Дата завершения:__ dd.mm.2026
 
 ---
 
-[Лабораторная работа №4: Работа с DOM-деревом и событиями в JavaScript](https://github.com/leopard-bf187/PHP_labworks/tree/Lab4)
+[Лабораторная работа №4: ](https://github.com/leopard-bf187/PHP_labworks/tree/Lab4)
 ```bash
 git clone --single-branch -b Lab4 https://github.com/leopard-bf187/PHP_labworks.git
 ```
@@ -40,7 +41,7 @@ __Дата завершения:__ dd.mm.2026
 
 ---
 
-[Индивидуальная работа: Работа с графической библиотекой Three.js на базе WebGL](https://github.com/IA204JavaScript/labworks_leopard187/tree/IndWork)
+[Индивидуальная работа: ](https://github.com/IA204JavaScript/labworks_leopard187/tree/IndWork)
 ```bash
 git clone --single-branch -b IndWork https://github.com/leopard-bf187/PHP_labworks.git
 ```
