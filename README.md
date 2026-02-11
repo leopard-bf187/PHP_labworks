@@ -10,7 +10,7 @@ __Преподаватель курса:__  *Нартя Никита*
 ```bash
 git clone --single-branch -b Lab1 https://github.com/leopard-bf187/PHP_labworks.git
 ```
-__Дата завершения:__ dd.mm.2026
+__Дата завершения:__ 11.02.2026
 
 ---
 
