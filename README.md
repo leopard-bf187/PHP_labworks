@@ -151,6 +151,8 @@ Content-Type: application/x-www-form-urlencoded
 make=Toyota&model=Corolla&year=2020
 ```
 
+## Контрольные вопросы
+
 ### Другие методы HTTP
 
 - GET - получение
