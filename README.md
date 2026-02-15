@@ -14,11 +14,11 @@ __Дата завершения:__ 11.02.2026
 
 ---
 
-[Лабораторная работа №2: ](https://github.com/leopard-bf187/PHP_labworks/tree/Lab2)
+[Лабораторная работа №2. Установка и первая программа на PHP ](https://github.com/leopard-bf187/PHP_labworks/tree/Lab2)
 ```bash
 git clone --single-branch -b Lab2 https://github.com/leopard-bf187/PHP_labworks.git
 ```
-__Дата завершения:__ dd.mm.2026
+__Дата завершения:__ 15.02.2026
 
 ---
 
