@@ -1,51 +1,152 @@
-# Лабораторные работы по PHP
+# Лабораторная работа №3. Управляющие конструкции
 
 __Студент:__  *Пармакли Леонид IA2404ru*  
 __Преподаватель лабораторных работ:__  *Вишневский Борис*  
 __Преподаватель курса:__  *Нартя Никита*  
 
----
-
-[Лабораторная работа №1: t](https://github.com/leopard-bf187/PHP_labworks/tree/Lab1)
-```bash
-git clone --single-branch -b Lab1 https://github.com/leopard-bf187/PHP_labworks.git
-```
-__Дата завершения:__ dd.mm.2026
 
 ---
+## Цель работы
+- Изучить устройство условного опертора if и if-else, а также изучить циклы for while и do-while
 
-[Лабораторная работа №2: ](https://github.com/leopard-bf187/PHP_labworks/tree/Lab2)
-```bash
-git clone --single-branch -b Lab2 https://github.com/leopard-bf187/PHP_labworks.git
-```
-__Дата завершения:__ dd.mm.2026
 
 ---
+## 1. Условия
+- Используя функцию date(), создайте таблицу с расписанием, формируемым на основе текущего дня недели.
 
-[Лабораторная работа №3: ](https://github.com/leopard-bf187/PHP_labworks/tree/Lab3)
-```bash
-git clone --single-branch -b Lab3 https://github.com/leopard-bf187/PHP_labworks.git
+```php
+<?php
+
+$day = date('N');
+
+function getJohnSchedule($day) 
+{
+    if ($day % 2)
+        return "8:00-12:00";
+
+    return "Нерабочий день";
+}
+
+function getJaneSchedule($day) 
+{
+    if (!($day % 2)) 
+        return "12:00-16:00";
+    
+    return "Нерабочий день";
+}
+
+function getSchedule($name) 
+{
+    $localDay = date('N'); 
+
+    switch ($name) 
+    {
+        case "John Styles":
+            switch ($localDay) 
+            {
+                case 1:
+                case 3:
+                case 5:
+                    return "8:00-12:00";
+
+                default:
+                    return "Нерабочий день";
+            }
+
+        case "Jane Doe":
+            switch ($localDay) 
+            {
+                case 2:
+                case 4:
+                case 6:
+                    return "12:00-16:00";
+
+                default:
+                    return "Нерабочий день";
+            }
+
+        default:
+            return "Сотрудник не найден";
+    }
+}
+
+?>
 ```
-__Дата завершения:__ dd.mm.2026
+
+
+![table.png](table.png)
+
 
 ---
+## 2. Циклы
 
-[Лабораторная работа №4: ](https://github.com/leopard-bf187/PHP_labworks/tree/Lab4)
-```bash
-git clone --single-branch -b Lab4 https://github.com/leopard-bf187/PHP_labworks.git
+### 2.1 Цикл for
+```php
+$a = 0;
+$b = 0;
+
+for ($i = 0; $i <= 5; $i++) 
+{
+   $a += 10; $b += 5;
+   echo "Шаг $i: a = $a, b = $b <br/>";
+}
+
+echo "Конец цикла for: a = $a, b = $b <br/>";
 ```
-__Дата завершения:__ dd.mm.2026
 
+### 2.2 Цикл while
 
-<!--
+```php
+$a = 0;
+$b = 0;
+$i = 0;
+
+while ($i <= 5) 
+{
+    $a += 10; $b += 5;
+    echo "Шаг $i: a = $a, b = $b <br/>";
+    $i++;
+}
+
+echo "Конец цикла while: a = $a, b = $b <br/>";
+```
+
+### 2.3 Цикл do-while
+
+```php
+$a = 0;
+$b = 0;
+$i = 0;
+
+do 
+{
+    $a += 10; $b += 5;
+    echo "Шаг $i: a = $a, b = $b <br/>";
+    $i++;
+} 
+while ($i <= 5);
+
+echo "Конец цикла do-while: a = $a, b = $b  <br/>";
+```
+
+![loops.png](loops.png)
 
 ---
+## 3. Контрольные вопросы
 
-[Индивидуальная работа: ](https://github.com/IA204JavaScript/labworks_leopard187/tree/IndWork)
-```bash
-git clone --single-branch -b IndWork https://github.com/leopard-bf187/PHP_labworks.git
-```
-__Дата завершения:__ 22.05.2025
+### 1. Разница между for, while и do-while
 
+- for является циклом со счетчиком, выполняемым известное количество раз.
+- while является циклом, выполняемым только при истинном условии, используется когда количество итераций неизвестно. Сначала проверка, потом выполнение.
+- do-while является циклом, выполняемым минимум один раз, Сначала выполнение, потом проверка.
 
--->
+### 2. Как работает тернарный оператор ? :
+
+- Тернарный оператор является сокращенной формой if-else
+    ```
+    условие ? значение_если_true : значение_если_false;
+    ```
+
+### 3. Что произойдет, если в do-while условие изначально ложно?
+
+- Тело цикла выполнится минимум 1 раз, так как сначала выполнится блок do, затем выполнится проверка условия
