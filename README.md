@@ -214,9 +214,9 @@ foreach ($images as $img) {
 ---
 # РЕЗУЛЬТАТ
 
-![Транзакции](image\img00.png)
+![Транзакции](image/img00.png)
 
-![Картинки](image\img01.png)
+![Картинки](image/img01.png)
 
 
 
