@@ -26,7 +26,7 @@ __Дата завершения:__ 15.02.2026
 ```bash
 git clone --single-branch -b Lab3 https://github.com/leopard-bf187/PHP_labworks.git
 ```
-__Дата завершения:__ 25.mm.2026
+__Дата завершения:__ 25.02.2026
 
 ---
 
@@ -34,7 +34,7 @@ __Дата завершения:__ 25.mm.2026
 ```bash
 git clone --single-branch -b Lab4 https://github.com/leopard-bf187/PHP_labworks.git
 ```
-__Дата завершения:__ dd.mm.2026
+__Дата завершения:__ 05.03.2026
 
 ---
 
@@ -49,6 +49,22 @@ __Дата завершения:__ dd.mm.2026
 [Лабораторная работа №6: ](https://github.com/leopard-bf187/PHP_labworks/tree/Lab6)
 ```bash
 git clone --single-branch -b Lab6 https://github.com/leopard-bf187/PHP_labworks.git
+```
+__Дата завершения:__ dd.mm.2026
+
+---
+
+[Лабораторная работа №7: ](https://github.com/leopard-bf187/PHP_labworks/tree/Lab7)
+```bash
+git clone --single-branch -b Lab7 https://github.com/leopard-bf187/PHP_labworks.git
+```
+__Дата завершения:__ dd.mm.2026
+
+---
+
+[Лабораторная работа №8: ](https://github.com/leopard-bf187/PHP_labworks/tree/Lab8)
+```bash
+git clone --single-branch -b Lab8 https://github.com/leopard-bf187/PHP_labworks.git
 ```
 __Дата завершения:__ dd.mm.2026
 
