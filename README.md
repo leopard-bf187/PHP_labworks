@@ -38,11 +38,11 @@ __Дата завершения:__ 05.03.2026
 
 ---
 
-[Лабораторная работа №5: ](https://github.com/leopard-bf187/PHP_labworks/tree/Lab5)
+[Лабораторная работа №5: Объектно-ориентированное программирование в PHP](https://github.com/leopard-bf187/PHP_labworks/tree/Lab5)
 ```bash
 git clone --single-branch -b Lab5 https://github.com/leopard-bf187/PHP_labworks.git
 ```
-__Дата завершения:__ dd.mm.2026
+__Дата завершения:__ 19.03.2026
 
 ---
 
