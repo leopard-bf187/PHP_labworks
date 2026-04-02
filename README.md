@@ -46,11 +46,11 @@ __Дата завершения:__ 19.03.2026
 
 ---
 
-[Лабораторная работа №6: ](https://github.com/leopard-bf187/PHP_labworks/tree/Lab6)
+[Лабораторная работа №6: Обработка и валидация форм](https://github.com/leopard-bf187/PHP_labworks/tree/Lab6)
 ```bash
 git clone --single-branch -b Lab6 https://github.com/leopard-bf187/PHP_labworks.git
 ```
-__Дата завершения:__ dd.mm.2026
+__Дата завершения:__ 02.04.2026
 
 ---
 
