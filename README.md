@@ -1,313 +1,185 @@
-# Лабораторная работа №5 — OOP в PHP
+# Лабораторная работа №6 — Обработка и валидация форм
 
 __Студент:__  *Пармакли Леонид IA2404ru*  
 __Преподаватель лабораторных работ:__  *Вишневский Борис*  
 __Преподаватель курса:__  *Нартя Никита*  
 
-
 ## Цель работы
-Освоить основы объектно-ориентированного программирования в PHP на практике. Научиться создавать собственные классы, использовать инкапсуляцию для защиты данных, разделять ответственность между классами, а также применять интерфейсы для построения гибкой архитектуры приложения.
 
-## Условие
+Освоить основные принципы работы с HTML-формами в PHP, включая отправку данных на сервер, обработку данных и их валидацию, согласно условиям лабораторной работы
 
-Необходимо разработать приложение для управления банковскими транзакциями.
-Приложение должно позволять:
 
-- хранить банковские транзакции;
-- добавлять новые транзакции;
-- удалять транзакции;
-- искать транзакции;
-- сортировать транзакции;
-- выполнять вычисления над коллекцией транзакций;
-- выводить данные в виде HTML-таблицы.
-
-## Что входит
-- `index.php` — готовое решение лабораторной работы в одном файле.
 
 ## Как запустить
-1. Откройте папку с файлом.
-2. Выполните команду:
-   ```bash
-   php -S localhost:8000
-   ```
-3. В браузере откройте:
-   ```
-   http://localhost:8000/index.php
-   ```
 
----
-## Задание 1. Включение строгой типизации
+1. Открыть терминал в папке проекта.
+2. Запустить встроенный сервер PHP:
+    ```
+    php -S localhost:8000
+    ```
+3. Открыть в браузере:
+    ```
+    http://localhost:8000/index.php
+    ```
 
-В начале файла включите строгую типизацию:
 
+
+## Задание 1. Определение модели данных
+
+В соответствии с условием лабораторной работы была выбрана тема «Дневник настроения».
+На основе требований (минимум 6 полей, наличие string, date, enum, text) была разработана модель данных MoodEntry.
+
+Используемые поля:
+
+- `title` — строка (`string`);
+- `mood_date` — дата (`date`);
+- `mood_type` — тип настроения (`enum`);
+- `energy_level` — уровень энергии (`enum`);
+- `note` — подробное описание (`text`);
+- `author` — автор (`string`);
+- `created_at` — дата создания (`date`);
+- `tags` — набор значений (`checkbox/enum`).
+
+Объявление класса модели:
 ```php
-<?php
-declare(strict_types=1);
-
-/*...*/
-
-?>
-```
-
----
-
-## Задание 2. Класс `Transaction`
-
-Создайте класс Transaction, который описывает одну банковскую транзакцию. Класс должен содержать следующие свойства:
-
-- id — уникальный идентификатор транзакции;
-- date — дата транзакции;
-- amount — сумма транзакции;
-- description — описание платежа;
-- merchant — получатель платежа.
-
-```php
-final class Transaction
+class MoodEntry
 {
+    private string $title;
+    private string $moodDate;
+    private string $moodType;
+    private string $energyLevel;
+    private string $note;
+    private string $author;
+    private string $createdAt;
+    private array $tags;
 
-    public function __construct
-    (
-        private int $id,
-        private string $date,
-        private float $amount,
-        private string $description,
-        private string $merchant
-    ) 
-    {
-    }
-
-    public function GetId(): int { /*...*/ }
-
-    public function GetDate(): string  { /*...*/ }
-
-    public function GetAmount(): float { /*...*/ }
-    
-    public function GetDescription(): string { /*...*/ }
-
-    public function GetMerchant(): string { /*...*/ }
-
-    public function GetDaysSinceTransaction(): int { /*...*/ }
-}
-```
-
----
-
-## Задание 3. Класс `TransactionRepository`
-
-Создайте класс TransactionRepository, который будет управлять коллекцией транзакций. Этот класс должен отвечать только за хранение данных и базовые операции доступа к ним. Класс должен:
-
-1. хранить массив объектов Transaction;
-2. добавлять новые транзакции;
-   - addTransaction(Transaction $transaction): void
-3. удалять транзакции по идентификатору;
-   - removeTransactionById(int $id): void
-4. возвращать полный список транзакций;
-   - getAllTransactions(): array
-5. находить транзакцию по id.
-   - findById(int $id): ?Transaction
-
-```php
-final class TransactionRepository implements TransactionStorageInterface
-{
-
-    private array $transactions = [];
-
-    public function AddTransaction(Transaction $transaction): void { /*...*/ }
-
-    public function RemoveTransactionById(int $id): void { /*...*/ }
-
-    public function GetAllTransactions(): array { /*...*/ }
-
-    public function FindById(int $id): ?Transaction { /*...*/ }
-}
-```
-
----
-
-## Задание 4. Класс `TransactionManager`
-
-Создайте класс TransactionManager, который будет использовать TransactionRepository для выполнения бизнес-логики. TransactionManager не должен создавать транзакции самостоятельно и не должен хранить их внутри себя. Объект TransactionRepository необходимо передать в TransactionManager через конструктор.
-Класс должен реализовать следующие функции:
-
-1. вычисление общей суммы всех транзакций;
-   - `calculateTotalAmount(): float`
-2. вычисление суммы транзакций за определенный период;
-   - `calculateTotalAmountByDateRange(string $startDate, string $endDate): float`
-3. подсчет количества транзакций по определенному получателю;
-   - `countTransactionsByMerchant(string $merchant): int`
-4. сортировку транзакций по дате;
-   - `sortTransactionsByDate(): Transaction[]`
-5. сортировку транзакций по сумме по убыванию.
-   - `sortTransactionsByAmountDesc(): Transaction[]`
-
-```php
-final class TransactionManager
-{
-    public function __construct(private TransactionStorageInterface $repository) 
-    {}
-
-    public function CalculateTotalAmount(): float { /*...*/ }
-
-    public function CalculateTotalAmountByDateRange(string $startDate, string $endDate): float { /*...*/ }
-
-    public function CountTransactionsByMerchant(string $merchant): int { /*...*/ }
-
-    public function SortTransactionsByDate(): array { /*...*/ }
-
-    public function SortTransactionsByAmountDesc(): array { /*...*/ }
-}
-```
-
----
-
-## Задание 5. Класс `TransactionTableRenderer`
-
-Создайте отдельный класс TransactionTableRenderer, который отвечает только за вывод транзакций в HTML. Этот класс должен получать список транзакций и формировать HTML-таблицу. Класс должен реализовать следующие функции:
-
-`render(array $transactions): string — принимает массив транзакций и возвращает строку с HTML-кодом таблицы.`
-
-Метод должен возвращать HTML-таблицу со следующими столбцами:
-
-- ID транзакции;
-- дата;
-- сумма;
-- описание;
-- название получателя;
-- категория получателя;
-- количество дней с момента транзакции.
-
-```php
-final class TransactionTableRenderer
-{
-    public function Render(array $transactions): string
-    {
-        $rows = '';
-
-        foreach ($transactions as $transaction) 
-        {
-            $rows .= sprintf
-            (
-                "<tr>\n" . 
-                "   <td>%d</td>\n" . 
-                "   <td>%s</td>\n" . 
-                "   <td>%.2f</td>\n" . 
-                "   <td>%s</td>\n" . 
-                "   <td>%s</td>\n" . 
-                "   <td>%s</td>\n" . 
-                "   <td>%d</td>\n" . 
-                "</tr>\n",
-                $transaction->GetId(),
-                $this->Escape($transaction->GetDate()),
-                $transaction->GetAmount(),
-                $this->Escape($transaction->GetDescription()),
-                $this->Escape($transaction->GetMerchant()),
-                $this->Escape($this->DetectMerchantCategory($transaction->GetMerchant())),
-                $transaction->GetDaysSinceTransaction()
-            );
-        }
-
-        return <<<htmlTableText
-<table>
-    <thead>
-        <tr>
-            <th>ID транзакции</th>
-            <th>Дата</th>
-            <th>Сумма</th>
-            <th>Описание</th>
-            <th>Получатель</th>
-            <th>Категория получателя</th>
-            <th>Дней с момента транзакции</th>
-        </tr>
-    </thead>
-    <tbody>
-        {$rows}
-    </tbody>
-</table>
-htmlTableText;
-
-    }
-
-    private function DetectMerchantCategory(string $merchant): string { /*...*/ }
-
-    private function Escape(string $value): string { /*...*/ }
+    public function __construct(...);
+    public function toArray(): array;
 }
 ```
 
 
----
 
-## Задание 6. Начальные данные
+## Задание 2. Создание HTML-формы
 
-Создайте не менее 10 объектов Transaction. Каждая транзакция должна содержать:
+Согласно условию, была разработана HTML-форма для создания записи. Реализовано:
+- метод отправки POST;
+- поля, соответствующие модели данных;
+- клиентская валидация через required, minlength, maxlength;
+- элементы select для enum;
+- checkbox для тегов;
+- поле textarea для длинного текста.
 
-- разные даты;
-- разные суммы;
-- разные описания;
-- разных получателей.
-
-После создания объектов добавьте транзакции в TransactionRepository.
-
+Объявление формы:
 ```php
-$repository = new TransactionRepository();
-
-$transactions = 
-[
-   new Transaction(1, '2025-09-03', 1250.50, 'Monthly apartment rent', 'City Home Rent'),
-   /*...*/
-   new Transaction(12, '2026-03-14', 145.00, 'Restaurant dinner', 'Sunset Restaurant'),
-];
-
-foreach ($transactions as $transaction) 
-    $repository->AddTransaction($transaction);
+<form action="submit.php" method="POST">
 ```
 
----
 
-## Задание 7. Интерфейс `TransactionStorageInterface`
 
-После завершения основной реализации сделайте архитектуру более гибкой. Создайте интерфейс TransactionStorageInterface.Интерфейс должен содержать методы:
+## Задание 3. Обработка данных на сервере
 
-1. `addTransaction(Transaction $transaction): void`
-2. `removeTransactionById(int $id): void`
-3. `getAllTransactions(): array`
-4. `findById(int $id): ?Transaction`
+В соответствии с заданием реализован PHP-скрипт обработки формы. Функциональность:
+- получение данных через $_POST;
+- серверная валидация;
+- создание объекта модели;
+- сохранение данных в файл JSON;
+- возврат сообщений об ошибках или успехе.
 
+Для этого реализованы отдельные классы.
+
+Объявление валидатора:
 ```php
-interface TransactionStorageInterface
+class Validator
 {
-    public function AddTransaction(Transaction $transaction): void;
+    private array $errors;
 
-    public function RemoveTransactionById(int $id): void;
-
-    public function GetAllTransactions(): array;
-
-    public function FindById(int $id): ?Transaction;
+    public function validate(array $data): bool;
+    public function getErrors(): array;
 }
-
-/*...*/
-
-    public function __construct(private TransactionStorageInterface $repository) 
-    {
-    }
-
-/*...*/
 ```
 
----
+
+Объявление хранилища
+```php
+class Storage
+{
+    private string $filePath;
+
+    public function __construct(string $filePath);
+    public function save(array $entry): bool;
+    public function readAll(): array;
+}
+```
+
+
+
+## Задание 4. Вывод данных
+
+Согласно условию, реализован отдельный скрипт для отображения данных.
+
+Функциональность:
+- чтение данных из JSON-файла;
+- отображение в HTML-таблице;
+- форматирование данных;
+- сортировка по полям (title, date, author, created_at).
+
+Основная логика сортировки:
+```php
+usort($entries, function ($a, $b) use ($sortField, $order) { ... });
+```
+
+
+
+## Задание 5. ООП-реализация
+Для получения максимальной оценки решение реализовано с использованием объектно-ориентированного подхода (как указано в условии). Такой подход улучшает читаемость кода расширяемость и разделение ответственности.
+
+Были выделены следующие классы:
+
+- `MoodEntry` — модель данных;
+- `Validator` — валидация;
+- `Storage` — работа с файлом;
+- `FormHandler` — управление формой.
+
+Объявление обработчика формы
+```php
+class FormHandler
+{
+    private Validator $validator;
+    private Storage $storage;
+
+    public function __construct(Validator $validator, Storage $storage);
+    public function handle(array $postData): array;
+}
+```
+
+
+### Скриншоты
+
+
+![index.png](/images/index.png)
+![submit.png](/images/submit.png)
+![list.png](/images/list.png)
+
+
+
 
 ## Контрольные вопросы
 
-### 1. Зачем нужна строгая типизация в PHP и как она помогает при разработке?
-Строгая типизация уменьшает количество скрытых ошибок, которые возникают из-за автоматического приведения типов. Она делает поведение программы более предсказуемым и упрощает отладку. Также она улучшает читаемость кода и помогает IDE точнее анализировать проект.
+### 1. Какие существуют методы отправки данных из формы на сервер? Какие методы поддерживает HTML-форма?
+Основные методы — GET и POST.
+- HTML-форма поддерживает оба метода через атрибут method.
+- GET передает данные через URL, а POST — в теле запроса.
 
-### 2. Что такое класс в объектно-ориентированном программировании и какие основные компоненты класса вы знаете?
-Класс — это шаблон для создания объектов. Обычно он содержит свойства, методы, конструктор и модификаторы доступа. Через класс описывают состояние объекта и его поведение.
+### 2. Какие глобальные переменные используются для доступа к данным формы в PHP?
+Основные суперглобальные массивы:
+- `$_GET` — данные из GET-запроса;
+- `$_POST` — данные из POST-запроса;
+- `$_REQUEST` — объединяет GET, POST и COOKIE.
 
-### 3. Объясните, что такое полиморфизм и как он может быть реализован в PHP.
-Полиморфизм — это возможность работать с разными объектами через единый интерфейс. В PHP он часто реализуется через интерфейсы, абстрактные классы и переопределение методов. В этой лабораторной это видно на примере `TransactionStorageInterface`, через который менеджер работает с хранилищем.
-
-### 4. Что такое интерфейс в PHP и как он отличается от абстрактного класса?
-Интерфейс задаёт только контракт: какие методы класс обязан реализовать. Абстрактный класс может содержать и абстрактные методы, и готовую общую реализацию. Интерфейс удобен для слабой связанности, а абстрактный класс — для повторного использования общей логики.
-
-### 5. Какие преимущества дает использование интерфейсов при проектировании архитектуры приложения? Объясните на примере данной лабораторной работы.
-Интерфейсы снижают связанность между частями программы и упрощают замену реализации. В этой лабораторной `TransactionManager` зависит не от конкретного `TransactionRepository`, а от `TransactionStorageInterface`. Поэтому позже можно заменить хранилище, например, на файловое или базу данных, почти не меняя бизнес-логику.
+### 3. Как обеспечить безопасность при обработке данных из формы (например, защититься от XSS)?
+Для защиты от XSS необходимо:
+- экранировать вывод с помощью htmlspecialchars();
+- валидировать входные данные;
+- не доверять данным пользователя;
+--использовать строгие проверки значений (например, in_array для enum).
