@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Leonid (@leopard_bf187) Parmacli" />
+    <title>{% block title %}Дневник настроения{% endblock %}</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container{% block container_class %}{% endblock %}">
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

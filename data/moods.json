@@ -1,0 +1,31 @@
+[
+    {
+        "title": "делаем лабы ч1",
+        "mood_date": "2026-04-20",
+        "mood_type": "sad",
+        "energy_level": "low",
+        "note": "тут надо чтоб было минимум 10 знаков, а почему не сразу 100?",
+        "author": "ктото точно автор",
+        "created_at": "2026-04-20 12:05:07",
+        "tags": [
+            "study",
+            "work"
+        ]
+    },
+    {
+        "title": "ыфваыва",
+        "mood_date": "2026-04-20",
+        "mood_type": "calm",
+        "energy_level": "high",
+        "note": "фывафываываываыавукцуарпправг5ук6коен",
+        "author": "ывйцкейк",
+        "created_at": "2026-04-20 13:36:38",
+        "tags": [
+            "study",
+            "work",
+            "family",
+            "sport",
+            "rest"
+        ]
+    }
+]

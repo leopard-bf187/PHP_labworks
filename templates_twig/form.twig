@@ -1,0 +1,55 @@
+{% extends "layout.twig" %}
+
+{% block title %}Дневник настроения - Добавление записи{% endblock %}
+
+{% block content %}
+<h1>Дневник настроения</h1>
+<h2>Добавление новой записи</h2>
+
+<form action="?page=submit&view=twig" method="POST" class="form-card">
+    <label for="title">Заголовок записи:</label>
+    <input type="text" id="title" name="title" required minlength="3" maxlength="100" placeholder="Например: Хороший учебный день">
+
+    <label for="mood_date">Дата:</label>
+    <input type="date" id="mood_date" name="mood_date" required>
+
+    <label for="mood_type">Настроение:</label>
+    <select id="mood_type" name="mood_type" required>
+        <option value="">Выберите настроение</option>
+        <option value="happy">Радостное</option>
+        <option value="calm">Спокойное</option>
+        <option value="sad">Грустное</option>
+        <option value="angry">Злое</option>
+        <option value="tired">Уставшее</option>
+    </select>
+
+    <label for="energy_level">Уровень энергии:</label>
+    <select id="energy_level" name="energy_level" required>
+        <option value="">Выберите уровень энергии</option>
+        <option value="low">Низкий</option>
+        <option value="medium">Средний</option>
+        <option value="high">Высокий</option>
+    </select>
+
+    <fieldset>
+        <legend>Теги:</legend>
+        <label><input type="checkbox" name="tags[]" value="study"> Учёба</label>
+        <label><input type="checkbox" name="tags[]" value="work"> Работа</label>
+        <label><input type="checkbox" name="tags[]" value="family"> Семья</label>
+        <label><input type="checkbox" name="tags[]" value="sport"> Спорт</label>
+        <label><input type="checkbox" name="tags[]" value="rest"> Отдых</label>
+    </fieldset>
+
+    <label for="note">Подробная заметка:</label>
+    <textarea id="note" name="note" required minlength="10" maxlength="1000" rows="6" placeholder="Опишите, как прошёл день..."></textarea>
+
+    <label for="author">Автор:</label>
+    <input type="text" id="author" name="author" required minlength="2" maxlength="50" placeholder="Введите имя автора">
+
+    <div class="button-group">
+        <button type="submit">Сохранить запись</button>
+        <a href="?page=list&view=twig" class="button-link">Посмотреть записи</a>
+        <a href="?page=form&view=php" class="button-link">PHP-версия</a>
+    </div>
+</form>
+{% endblock %}

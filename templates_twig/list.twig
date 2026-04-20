@@ -1,0 +1,48 @@
+{% extends "layout.twig" %}
+
+{% block title %}Список записей дневника настроения{% endblock %}
+{% block container_class %} wide{% endblock %}
+
+{% block content %}
+<h1>Список записей дневника настроения</h1>
+
+<div class="button-group">
+    <a href="?page=form&view=twig" class="button-link">Добавить новую запись</a>
+    <a href="?page=list&view=php" class="button-link">PHP-версия</a>
+</div>
+
+{% if entries is empty %}
+    <div class="info-box">
+        <p>Записей пока нет.</p>
+    </div>
+{% else %}
+    <table>
+        <thead>
+        <tr>
+            <th><a href="?page=list&sort=title&order={{ title_order }}&view=twig">Заголовок</a></th>
+            <th><a href="?page=list&sort=mood_date&order={{ mood_date_order }}&view=twig">Дата</a></th>
+            <th><a href="?page=list&sort=mood_type&order={{ mood_type_order }}&view=twig">Настроение</a></th>
+            <th><a href="?page=list&sort=energy_level&order={{ energy_level_order }}&view=twig">Энергия</a></th>
+            <th>Теги</th>
+            <th>Заметка</th>
+            <th><a href="?page=list&sort=author&order={{ author_order }}&view=twig">Автор</a></th>
+            <th><a href="?page=list&sort=created_at&order={{ created_at_order }}&view=twig">Создано</a></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entry in entries %}
+            <tr>
+                <td>{{ entry.title }}</td>
+                <td>{{ entry.mood_date }}</td>
+                <td>{{ entry.mood_type|mood_icon }} {{ entry.mood_type|mood_label }}</td>
+                <td>{{ entry.energy_level|energy_label }}</td>
+                <td>{{ entry.tags|join(', ') }}</td>
+                <td>{{ entry.note }}</td>
+                <td>{{ entry.author }}</td>
+                <td>{{ entry.created_at }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+{% endblock %}
