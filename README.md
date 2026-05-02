@@ -54,11 +54,11 @@ __Дата завершения:__ 02.04.2026
 
 ---
 
-[Лабораторная работа №7: ](https://github.com/leopard-bf187/PHP_labworks/tree/Lab7)
+[Лабораторная работа №7: Шаблонизация](https://github.com/leopard-bf187/PHP_labworks/tree/Lab7)
 ```bash
 git clone --single-branch -b Lab7 https://github.com/leopard-bf187/PHP_labworks.git
 ```
-__Дата завершения:__ dd.mm.2026
+__Дата завершения:__ 20.04.2026
 
 ---
 
@@ -66,8 +66,15 @@ __Дата завершения:__ dd.mm.2026
 ```bash
 git clone --single-branch -b Lab8 https://github.com/leopard-bf187/PHP_labworks.git
 ```
-__Дата завершения:__ dd.mm.2026
+__Дата завершения:__ 02.05.2026
 
+---
+
+[Индивидуальная работа: ](https://github.com/leopard-bf187/PHP_labworks/tree/IndWork)
+```bash
+git clone --single-branch -b IndWork https://github.com/leopard-bf187/PHP_labworks.git
+```
+__Дата завершения:__ 03.05.2026
 
 <!--
 
