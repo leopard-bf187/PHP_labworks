@@ -1,0 +1,59 @@
+{% extends "layout.twig" %}
+
+{% block title %}Главная{% endblock %}
+{% block container_class %} wide{% endblock %}
+
+{% block content %}
+<h1>Дневник настроения</h1>
+
+<div class="info-box">
+    <p>
+        Это веб-приложение для ведения личного дневника настроения.
+        Пользователи могут создавать записи, указывать настроение,
+        уровень энергии, заметки и теги.
+    </p>
+</div>
+
+<h2>Статистика проекта</h2>
+
+<div class="cards">
+    <div class="card">
+        <h3>Всего записей</h3>
+        <p>{{ stats.total_entries }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Пользователей</h3>
+        <p>{{ stats.total_users }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Популярное настроение</h3>
+        {% if stats.popular_mood %}
+            <p>{{ stats.popular_mood.icon }} {{ stats.popular_mood.title }}</p>
+        {% else %}
+            <p>Пока нет данных</p>
+        {% endif %}
+    </div>
+</div>
+
+<h2>Последние записи</h2>
+
+{% if latest_entries is empty %}
+    <p>Пока нет записей.</p>
+{% else %}
+    <div class="cards">
+        {% for entry in latest_entries %}
+            <div class="card">
+                <h3>{{ entry.mood_icon }} {{ entry.title }}</h3>
+                <p><strong>Настроение:</strong> {{ entry.mood_title }}</p>
+                <p><strong>Дата:</strong> {{ entry.mood_date }}</p>
+                <p><strong>Автор:</strong> {{ entry.username }}</p>
+                <p>{{ entry.note }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}
+
+

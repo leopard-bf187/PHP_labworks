@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Дневник настроения{% endblock %}</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="nav-container">
+        <a href="index.php?page=home" class="logo">Дневник настроения</a>
+
+        <nav class="nav-links">
+            <a href="index.php?page=home">Главная</a>
+
+            {% if current_user %}
+                <a href="index.php?page=list">Мои записи</a>
+                <a href="index.php?page=create">Добавить запись</a>
+
+                {% if is_admin %}
+                    <a href="index.php?page=admin_entries">Все записи</a>
+                    <a href="index.php?page=admin_users">Пользователи</a>
+                {% endif %}
+
+                <span class="nav-user">
+                    {{ current_user.username }} / {{ current_user.role }}
+                </span>
+
+                <a href="index.php?page=logout">Выйти</a>
+            {% else %}
+                <a href="index.php?page=login">Войти</a>
+                <a href="index.php?page=register">Регистрация</a>
+            {% endif %}
+        </nav>
+    </div>
+</header>
+
+<main class="container{% block container_class %}{% endblock %}">
+    {% block content %}{% endblock %}
+</main>
+
+</body>
+</html>
+
+

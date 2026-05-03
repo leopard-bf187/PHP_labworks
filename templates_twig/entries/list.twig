@@ -1,0 +1,103 @@
+{% extends "layout.twig" %}
+
+{% block title %}Записи дневника{% endblock %}
+{% block container_class %} wide{% endblock %}
+
+{% block content %}
+<h1>
+    {% if is_admin %}
+        Все записи дневника
+    {% else %}
+        Мои записи дневника
+    {% endif %}
+</h1>
+
+<div class="button-group">
+    <a href="index.php?page=create" class="button-link">Добавить запись</a>
+</div>
+
+<form action="index.php" method="GET" class="search-form">
+    <input type="hidden" name="page" value="list">
+
+    <input
+        type="text"
+        name="q"
+        value="{{ query }}"
+        placeholder="Поиск по заголовку, заметке, автору, настроению"
+    >
+
+    <button type="submit">Искать</button>
+
+    {% if query %}
+        <a href="index.php?page=list" class="button-link">Сбросить</a>
+    {% endif %}
+</form>
+
+{% if entries is empty %}
+    <div class="info-box">
+        <p>Записей пока нет.</p>
+    </div>
+{% else %}
+    <table>
+        <thead>
+        <tr>
+            <th><a href="index.php?page=list&sort=title&order={{ order == 'asc' and sort == 'title' ? 'desc' : 'asc' }}">Заголовок</a></th>
+            <th><a href="index.php?page=list&sort=mood_date&order={{ order == 'asc' and sort == 'mood_date' ? 'desc' : 'asc' }}">Дата</a></th>
+            <th><a href="index.php?page=list&sort=mood_title&order={{ order == 'asc' and sort == 'mood_title' ? 'desc' : 'asc' }}">Настроение</a></th>
+            <th><a href="index.php?page=list&sort=energy_level&order={{ order == 'asc' and sort == 'energy_level' ? 'desc' : 'asc' }}">Энергия</a></th>
+            <th>Теги</th>
+            <th>Заметка</th>
+            <th>Автор</th>
+            {% if is_admin %}
+                <th>Пользователь</th>
+            {% endif %}
+            <th><a href="index.php?page=list&sort=created_at&order={{ order == 'asc' and sort == 'created_at' ? 'desc' : 'asc' }}">Создано</a></th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for entry in entries %}
+            <tr>
+                <td>{{ entry.title }}</td>
+                <td>{{ entry.mood_date }}</td>
+                <td>{{ entry.mood_icon }} {{ entry.mood_title }}</td>
+                <td>{{ entry.energy_level|energy_label }}</td>
+                <td>{{ entry.tags|join(', ') }}</td>
+                <td>{{ entry.note }}</td>
+                <td>{{ entry.author }}</td>
+
+                {% if is_admin %}
+                    <td>{{ entry.username }}</td>
+                {% endif %}
+
+                <td>{{ entry.created_at }}</td>
+
+                <td>
+                    <div class="table-actions">
+                        <a href="index.php?page=edit&id={{ entry.id }}" class="button-link small">
+                            Редактировать
+                        </a>
+
+                        <form action="index.php?page=delete" method="POST" class="delete-form">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                            <input type="hidden" name="id" value="{{ entry.id }}">
+
+                            <button
+                                type="submit"
+                                class="danger-button small"
+                                onclick="return confirm('Удалить запись?')"
+                            >
+                                Удалить
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+{% endblock %}
+
+

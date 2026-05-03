@@ -1,0 +1,65 @@
+{% extends "layout.twig" %}
+
+{% block title %}Пользователи{% endblock %}
+{% block container_class %} wide{% endblock %}
+
+{% block content %}
+<h1>Управление пользователями</h1>
+
+<div class="button-group">
+    <a href="index.php?page=admin_create_user" class="button-link">
+        Создать администратора
+    </a>
+</div>
+
+{% if users is empty %}
+    <div class="info-box">
+        <p>Пользователей пока нет.</p>
+    </div>
+{% else %}
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Имя пользователя</th>
+            <th>Email</th>
+            <th>Роль</th>
+            <th>Дата создания</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+                <td>{{ user.created_at }}</td>
+                <td>
+                    {% if current_user.id != user.id %}
+                        <form action="index.php?page=admin_delete_user" method="POST" class="delete-form">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                            <input type="hidden" name="id" value="{{ user.id }}">
+
+                            <button
+                                type="submit"
+                                class="danger-button small"
+                                onclick="return confirm('Удалить пользователя? Все его записи тоже будут удалены.')"
+                            >
+                                Удалить
+                            </button>
+                        </form>
+                    {% else %}
+                        Текущий пользователь
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+{% endblock %}
+
+

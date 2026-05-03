@@ -1,0 +1,146 @@
+{% extends "layout.twig" %}
+
+{% block title %}
+    {% if mode == 'edit' %}
+        Редактирование записи
+    {% else %}
+        Создание записи
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<h1>
+    {% if mode == 'edit' %}
+        Редактирование записи
+    {% else %}
+        Создание записи
+    {% endif %}
+</h1>
+
+{% if errors is not empty %}
+    <div class="error-box">
+        <p>Обнаружены ошибки:</p>
+        <ul>
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+<form action="{{ action }}" method="POST" class="form-card">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+    <label for="title">Заголовок:</label>
+    <input
+        type="text"
+        id="title"
+        name="title"
+        required
+        minlength="3"
+        maxlength="100"
+        value="{{ entry.title|default('') }}"
+        placeholder="Например: Хороший день"
+    >
+
+    <label for="mood_date">Дата:</label>
+    <input
+        type="date"
+        id="mood_date"
+        name="mood_date"
+        required
+        value="{{ entry.mood_date|default('') }}"
+    >
+
+    <label for="mood_id">Настроение:</label>
+    <select id="mood_id" name="mood_id" required>
+        <option value="">Выберите настроение</option>
+        {% for mood in moods %}
+            <option
+                value="{{ mood.id }}"
+                {% if entry.mood_id|default('') == mood.id %}
+                    selected
+                {% endif %}
+            >
+                {{ mood.icon }} {{ mood.title }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <label for="energy_level">Уровень энергии:</label>
+    <select id="energy_level" name="energy_level" required>
+        <option value="">Выберите уровень энергии</option>
+        <option value="low" {% if entry.energy_level|default('') == 'low' %}selected{% endif %}>Низкий</option>
+        <option value="medium" {% if entry.energy_level|default('') == 'medium' %}selected{% endif %}>Средний</option>
+        <option value="high" {% if entry.energy_level|default('') == 'high' %}selected{% endif %}>Высокий</option>
+    </select>
+
+    {% set entry_tags = entry.tags|default([]) %}
+
+    <fieldset>
+        <legend>Теги:</legend>
+
+        <label>
+            <input type="checkbox" name="tags[]" value="study" {% if 'study' in entry_tags %}checked{% endif %}>
+            Учёба
+        </label>
+
+        <label>
+            <input type="checkbox" name="tags[]" value="work" {% if 'work' in entry_tags %}checked{% endif %}>
+            Работа
+        </label>
+
+        <label>
+            <input type="checkbox" name="tags[]" value="family" {% if 'family' in entry_tags %}checked{% endif %}>
+            Семья
+        </label>
+
+        <label>
+            <input type="checkbox" name="tags[]" value="sport" {% if 'sport' in entry_tags %}checked{% endif %}>
+            Спорт
+        </label>
+
+        <label>
+            <input type="checkbox" name="tags[]" value="rest" {% if 'rest' in entry_tags %}checked{% endif %}>
+            Отдых
+        </label>
+    </fieldset>
+
+    <label for="note">Заметка:</label>
+    <textarea
+        id="note"
+        name="note"
+        required
+        minlength="10"
+        maxlength="1000"
+        rows="6"
+        placeholder="Опишите, как прошёл день..."
+    >{{ entry.note|default('') }}</textarea>
+
+    <label for="author">Автор:</label>
+    <input
+        type="text"
+        id="author"
+        name="author"
+        required
+        minlength="2"
+        maxlength="50"
+        value="{{ entry.author|default(current_user.username|default('')) }}"
+        placeholder="Имя автора"
+    >
+
+    <div class="button-group">
+        <button type="submit">
+            {% if mode == 'edit' %}
+                Сохранить изменения
+            {% else %}
+                Создать запись
+            {% endif %}
+        </button>
+
+        <a href="index.php?page=list" class="button-link">К списку</a>
+    </div>
+</form>
+{% endblock %}
+
+

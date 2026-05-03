@@ -1,0 +1,17 @@
+{% extends "layout.twig" %}
+
+{% block title %}Ошибка{% endblock %}
+
+{% block content %}
+<h1>Ошибка</h1>
+
+<div class="error-box">
+    <p>{{ message }}</p>
+</div>
+
+<div class="button-group">
+    <a href="index.php?page=home" class="button-link">На главную</a>
+</div>
+{% endblock %}
+
+
