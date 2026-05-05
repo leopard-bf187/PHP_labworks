@@ -39,31 +39,6 @@ project/
 ```
 
 
-```
-Публичные:
-?page=home
-?page=login
-?page=register
-
-Auth:
-?page=logout
-
-Пользователь:
-?page=list
-?page=create
-?page=store
-?page=edit&id=1
-?page=update&id=1
-?page=delete
-
-Администратор:
-?page=admin_users
-?page=admin_create_user
-?page=admin_store_user
-?page=admin_entries
-?page=admin_delete_user
-```
-
 
 
 ```
