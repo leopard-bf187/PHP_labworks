@@ -62,7 +62,7 @@ __Дата завершения:__ 20.04.2026
 
 ---
 
-[Лабораторная работа №8: ](https://github.com/leopard-bf187/PHP_labworks/tree/Lab8)
+[Лабораторная работа №8: Базы данных](https://github.com/leopard-bf187/PHP_labworks/tree/Lab8)
 ```bash
 git clone --single-branch -b Lab8 https://github.com/leopard-bf187/PHP_labworks.git
 ```
@@ -70,7 +70,7 @@ __Дата завершения:__ 02.05.2026
 
 ---
 
-[Индивидуальная работа: ](https://github.com/leopard-bf187/PHP_labworks/tree/IndWork)
+[Индивидуальная работа: Веб-приложение "Дневник настроения"](https://github.com/leopard-bf187/PHP_labworks/tree/IndWork)
 ```bash
 git clone --single-branch -b IndWork https://github.com/leopard-bf187/PHP_labworks.git
 ```
